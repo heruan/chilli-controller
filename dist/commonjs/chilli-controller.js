@@ -41,7 +41,7 @@ var ChilliController = exports.ChilliController = (_temp = _class = function () 
     var options = arguments.length <= 2 || arguments[2] === undefined ? {} : arguments[2];
 
     if (options.protocol) {
-      var valid = ~Pepper.authProtocols.indexOf(options.protocol.toLowerCase());
+      var valid = ~ChilliController.authProtocols.indexOf(options.protocol.toLowerCase());
       if (!valid) {
         return Promise.reject(new Error("Invalid or unsupported authentication protocol"));
       }
@@ -50,8 +50,8 @@ var ChilliController = exports.ChilliController = (_temp = _class = function () 
     return this.status().then(function (status) {
       if (!status.challange) {
         throw new Error("Cannot find a challange");
-      } else if (status.clientState === Pepper.stateCodes.AUTH) {
-        throw new Error("Current clientState is already %d", Pepper.stateCodes.AUTH);
+      } else if (status.clientState === ChilliController.stateCodes.AUTH) {
+        throw new Error("Current clientState is already %d", ChilliController.stateCodes.AUTH);
       }
       if (_this2.uamservice && protocol === "chap") {
         throw new Error("Not supported yet: uamservice");
