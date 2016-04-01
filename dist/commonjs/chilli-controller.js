@@ -64,7 +64,7 @@ var ChilliController = exports.ChilliController = (_temp = _class = function () 
         } else {
           payload.password = password;
         }
-        return _this2.api.createRequest("logon").asGet().asJsonp("jsoncallback").withParams(payload).send().then(function (success) {
+        return _this2.api.createRequest("logon").asGet().asJsonp(ChilliController.JSONP_CALLBACK).withParams(payload).send().then(function (success) {
           return success.content;
         });
       }
@@ -72,19 +72,19 @@ var ChilliController = exports.ChilliController = (_temp = _class = function () 
   };
 
   ChilliController.prototype.logoff = function logoff() {
-    return this.api.jsonp("logoff").then(function (success) {
+    return this.api.jsonp("logoff", ChilliController.JSONP_CALLBACK).then(function (success) {
       return success.content;
     });
   };
 
   ChilliController.prototype.status = function status() {
-    return this.api.jsonp("status").then(function (success) {
+    return this.api.jsonp("status", ChilliController.JSONP_CALLBACK).then(function (success) {
       return success.content;
     });
   };
 
   return ChilliController;
-}(), _class.stateCodes = {
+}(), _class.JSONP_CALLBACK = "callback", _class.stateCodes = {
   UNKNOWN: -1,
   NOT_AUTH: 0,
   AUTH: 1,

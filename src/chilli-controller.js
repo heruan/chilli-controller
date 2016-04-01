@@ -3,6 +3,8 @@ import {chap} from "./chap";
 
 export class ChilliController {
 
+  static JSONP_CALLBACK = "callback";
+
   static stateCodes = {
     UNKNOWN: -1,
     NOT_AUTH: 0,
@@ -60,18 +62,18 @@ export class ChilliController {
         } else {
           payload.password = password;
         }
-        return this.api.createRequest("logon").asGet().asJsonp("jsoncallback")
+        return this.api.createRequest("logon").asGet().asJsonp(ChilliController.JSONP_CALLBACK)
         .withParams(payload).send().then(success => success.content);
       }
     });
   }
 
   logoff() {
-    return this.api.jsonp("logoff").then(success => success.content);
+    return this.api.jsonp("logoff", ChilliController.JSONP_CALLBACK).then(success => success.content);
   }
 
   status() {
-    return this.api.jsonp("status").then(success => success.content);
+    return this.api.jsonp("status", ChilliController.JSONP_CALLBACK).then(success => success.content);
   }
 
 }

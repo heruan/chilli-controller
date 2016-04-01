@@ -42,20 +42,20 @@ export let ChilliController = (_temp = _class = class ChilliController {
         } else {
           payload.password = password;
         }
-        return this.api.createRequest("logon").asGet().asJsonp("jsoncallback").withParams(payload).send().then(success => success.content);
+        return this.api.createRequest("logon").asGet().asJsonp(ChilliController.JSONP_CALLBACK).withParams(payload).send().then(success => success.content);
       }
     });
   }
 
   logoff() {
-    return this.api.jsonp("logoff").then(success => success.content);
+    return this.api.jsonp("logoff", ChilliController.JSONP_CALLBACK).then(success => success.content);
   }
 
   status() {
-    return this.api.jsonp("status").then(success => success.content);
+    return this.api.jsonp("status", ChilliController.JSONP_CALLBACK).then(success => success.content);
   }
 
-}, _class.stateCodes = {
+}, _class.JSONP_CALLBACK = "callback", _class.stateCodes = {
   UNKNOWN: -1,
   NOT_AUTH: 0,
   AUTH: 1,
