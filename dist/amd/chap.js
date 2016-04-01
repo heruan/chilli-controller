@@ -5,7 +5,7 @@ define(["exports", "./core-md5"], function (exports, _coreMd) {
     value: true
   });
   exports.chap = chap;
-  function chap(ident, password, challange) {
+  function chap(ident, password, challenge) {
     var hexPassword = str2hex(password);
 
     var hex = ident + hexPassword + challenge;
