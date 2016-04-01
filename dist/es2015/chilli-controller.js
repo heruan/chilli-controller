@@ -26,8 +26,8 @@ export let ChilliController = (_temp = _class = class ChilliController {
     }
     let protocol = options.protocol ? options.protocol.toLowerCase() : "chap";
     return this.status().then(status => {
-      if (!status.challange) {
-        throw new Error("Cannot find a challange");
+      if (!status.challenge) {
+        throw new Error("Cannot find a challenge");
       } else if (status.clientState === ChilliController.stateCodes.AUTH) {
         throw new Error("Current clientState is already %d", ChilliController.stateCodes.AUTH);
       }
@@ -38,7 +38,7 @@ export let ChilliController = (_temp = _class = class ChilliController {
           username: username
         };
         if (protocol === "chap") {
-          payload.response = chap(this.ident, password, status.challange);
+          payload.response = chap(this.ident, password, status.challenge);
         } else {
           payload.password = password;
         }

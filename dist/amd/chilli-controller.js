@@ -49,8 +49,8 @@ define(["exports", "aurelia-http-client", "./chap"], function (exports, _aurelia
       }
       var protocol = options.protocol ? options.protocol.toLowerCase() : "chap";
       return this.status().then(function (status) {
-        if (!status.challange) {
-          throw new Error("Cannot find a challange");
+        if (!status.challenge) {
+          throw new Error("Cannot find a challenge");
         } else if (status.clientState === ChilliController.stateCodes.AUTH) {
           throw new Error("Current clientState is already %d", ChilliController.stateCodes.AUTH);
         }
@@ -61,7 +61,7 @@ define(["exports", "aurelia-http-client", "./chap"], function (exports, _aurelia
             username: username
           };
           if (protocol === "chap") {
-            payload.response = (0, _chap.chap)(_this2.ident, password, status.challange);
+            payload.response = (0, _chap.chap)(_this2.ident, password, status.challenge);
           } else {
             payload.password = password;
           }
