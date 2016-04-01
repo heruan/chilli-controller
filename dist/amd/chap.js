@@ -33,7 +33,7 @@ define(["exports", "./core-md5"], function (exports, _coreMd) {
 
     var bin = [];
 
-    for (i = 0; i < hex.length * 4; i = i + 8) {
+    for (var i = 0; i < hex.length * 4; i = i + 8) {
       octet = parseInt(hex.substr(i / 4, 2), 16);
       bin[i >> 5] |= (octet & 255) << i % 32;
     }
