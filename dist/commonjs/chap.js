@@ -7,7 +7,7 @@ exports.chap = chap;
 
 var _coreMd = require("./core-md5");
 
-function chap(ident, string, challange) {
+function chap(ident, password, challange) {
   var hexPassword = str2hex(password);
 
   var hex = ident + hexPassword + challenge;

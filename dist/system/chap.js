@@ -42,7 +42,7 @@ System.register(["./core-md5"], function (_export, _context) {
       md5 = _coreMd.md5;
     }],
     execute: function () {
-      function chap(ident, string, challange) {
+      function chap(ident, password, challange) {
         var hexPassword = str2hex(password);
 
         var hex = ident + hexPassword + challenge;

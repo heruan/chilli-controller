@@ -1,6 +1,6 @@
 import {md5} from "./core-md5";
 
-export function chap(ident, string, challange) {
+export function chap(ident, password, challange) {
   var hexPassword = str2hex(password);
 
   var hex = ident + hexPassword + challenge;
