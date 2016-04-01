@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/heruan/chilli-controller/issues"
   },
-  "license": "MIT",
+  "license": "CC0-1.0",
   "author": "Giovanni Lovato <heruan@aldu.net>",
   "main": "dist/commonjs/index.js",
   "repository": {
