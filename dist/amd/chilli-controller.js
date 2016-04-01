@@ -48,11 +48,10 @@ define(["exports", "aurelia-http-client", "./chap"], function (exports, _aurelia
         }
       }
       var protocol = options.protocol ? options.protocol.toLowerCase() : "chap";
-      return this.api.jsonp("status").then(function (success) {
-        var data = success.content;
-        if (!data.challange) {
+      return this.status().then(function (status) {
+        if (!status.challange) {
           throw new Error("Cannot find a challange");
-        } else if (data.clientState === Pepper.stateCodes.AUTH) {
+        } else if (status.clientState === Pepper.stateCodes.AUTH) {
           throw new Error("Current clientState is already %d", Pepper.stateCodes.AUTH);
         }
         if (_this2.uamservice && protocol === "chap") {
@@ -62,7 +61,7 @@ define(["exports", "aurelia-http-client", "./chap"], function (exports, _aurelia
             username: username
           };
           if (protocol === "chap") {
-            payload.response = (0, _chap.chap)(_this2.ident, password, data.challange);
+            payload.response = (0, _chap.chap)(_this2.ident, password, status.challange);
           } else {
             payload.password = password;
           }
@@ -75,6 +74,12 @@ define(["exports", "aurelia-http-client", "./chap"], function (exports, _aurelia
 
     ChilliController.prototype.logoff = function logoff() {
       return this.api.jsonp("logoff").then(function (success) {
+        return success.content;
+      });
+    };
+
+    ChilliController.prototype.status = function status() {
+      return this.api.jsonp("status").then(function (success) {
         return success.content;
       });
     };

@@ -25,11 +25,10 @@ export let ChilliController = (_temp = _class = class ChilliController {
       }
     }
     let protocol = options.protocol ? options.protocol.toLowerCase() : "chap";
-    return this.api.jsonp("status").then(success => {
-      let data = success.content;
-      if (!data.challange) {
+    return this.status().then(status => {
+      if (!status.challange) {
         throw new Error("Cannot find a challange");
-      } else if (data.clientState === Pepper.stateCodes.AUTH) {
+      } else if (status.clientState === Pepper.stateCodes.AUTH) {
         throw new Error("Current clientState is already %d", Pepper.stateCodes.AUTH);
       }
       if (this.uamservice && protocol === "chap") {
@@ -39,7 +38,7 @@ export let ChilliController = (_temp = _class = class ChilliController {
           username: username
         };
         if (protocol === "chap") {
-          payload.response = chap(this.ident, password, data.challange);
+          payload.response = chap(this.ident, password, status.challange);
         } else {
           payload.password = password;
         }
@@ -50,6 +49,10 @@ export let ChilliController = (_temp = _class = class ChilliController {
 
   logoff() {
     return this.api.jsonp("logoff").then(success => success.content);
+  }
+
+  status() {
+    return this.api.jsonp("status").then(success => success.content);
   }
 
 }, _class.stateCodes = {
